@@ -1,20 +1,13 @@
-import random
-import sys
-import asyncio
-import threading
+from tkinter import Tk
 from GameOfLife import GameOfLife
-from IHM import IHM
+from Ihm import IHM
 
-IHM = IHM()
+input_interface = IHM()
 
-IHM.launch()
+while input_interface.replay:
 
-while IHM.done:
-    GOF = GameOfLife(IHM.values)
-
-
-# while IHM.done == False:
-#     asyncio.wait()
-#
-# GOF = GameOfLife(IHM.values)
-# print(GOF.values)
+    input_interface.launch(Tk())
+    print(input_interface.values)
+    game_interface = GameOfLife(input_interface.values)
+    game_interface.launch()
+    input_interface.pop_up(Tk())
