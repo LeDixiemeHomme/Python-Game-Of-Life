@@ -1,28 +1,45 @@
-from tkinter import Tk, StringVar, Label, Entry, Button
+from tkinter import StringVar, Label, Entry, Button
 from functools import partial
-import threading
 
 class IHM:
 
     def __init__(self):
-        self.root = Tk()
         self.values = list()
-        self.done = False
-        self.title = Label(self.root, text='PARAMETERS :')
-        self.elements = [(Label(self.root, text='un élément'), Entry(self.root, textvariable=(StringVar(self.root)))),
-                    (Label(self.root, text='un autre élément'), Entry(self.root, textvariable=(StringVar(self.root))))]
-        self.button = Button(self.root, text='clic', command=partial(self.data_treatment, self.elements, self.values))
+        self.replay = True
 
-    def data_treatment(self,elements, values):
+    def data_treatment(self, elements, values, root):
+        values.clear()
         for i in elements:
             values.append(i[1].get())
-        self.done = True
-        self.root.destroy()
+        root.destroy()
 
-    def launch(self):
-        self.title.grid(column=0, row=0)
-        [value[0].grid(column=0, row=i + 1) for i, value in enumerate(self.elements)]
-        [value[1].grid(column=1, row=i + 1) for i, value in enumerate(self.elements)]
+    def close(self, root):
+        self.replay = False
+        root.destroy()
 
-        self.button.grid(column=1, row=5)
-        self.root.mainloop()
+    def retry(self, root):
+        root.destroy()
+
+    def launch(self, root):
+        title = Label(root, text='PARAMETERS :')
+        elements = [(Label(root, text='un élément'), Entry(root, textvariable=(StringVar(root)))),
+                    (Label(root, text='un autre élément'), Entry(root, textvariable=(StringVar(root))))]
+        button = Button(root, text='clic', command=partial(self.data_treatment, elements, self.values, root))
+
+        title.grid(column=0, row=0)
+        [value[0].grid(column=0, row=i + 1) for i, value in enumerate(elements)]
+        [value[1].grid(column=1, row=i + 1) for i, value in enumerate(elements)]
+
+        button.grid(column=1, row=5)
+        root.mainloop()
+
+    def pop_up(self, root):
+        title_retry = Label(root, text='Would you like to retry ?')
+        buttonYes = Button(root, text='Yes', command=partial(self.retry, root))
+        buttonNo = Button(root, text='No', command=partial(self.close, root))
+
+        title_retry.grid(column=0, row=0)
+
+        buttonYes.grid(column=0, row=1)
+        buttonNo.grid(column=1, row=1)
+        root.mainloop()
