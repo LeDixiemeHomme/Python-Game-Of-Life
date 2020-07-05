@@ -1,6 +1,6 @@
 from Runner import Runner
 
 runner = Runner()
-for round in range(runner.rounds):
+while runner.rounds >= 0:
     print(runner)
     runner.run()

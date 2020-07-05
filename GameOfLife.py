@@ -25,7 +25,8 @@ class GameOfLife:
             self.clock.tick(12)
 
     def treatment(self, runner):
-        for round in range(runner.rounds):
+        while runner.rounds >= 0:
+            
             for elements in runner.map:
                 for element in elements:
                     i = randint(1,2)
