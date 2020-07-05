@@ -7,6 +7,18 @@ class IHM:
         self.values = list()
         self.replay = True
 
+    def getValues(self):
+        for c, v in enumerate(self.values):
+            try:
+                self.values[c] = int(v)
+            except ValueError:
+                print('No letter allowed', v)
+                return False
+            except TypeError:
+                print('No letter allowed', v)
+                return False
+        return self.values
+
     def data_treatment(self, elements, values, root):
         values.clear()
         for i in elements:

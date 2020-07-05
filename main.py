@@ -8,8 +8,13 @@ input_interface = IHM()
 while input_interface.replay:
 
     input_interface.launch(Tk())
-    runner = Runner()
-    # runner = Runner(input_interface.values) initialliser le runner avec les valeurs [dimension, rounds]
+    values = input_interface.getValues()
+    if values:
+        print([v for v in values])
+        runner = Runner(size=values[0], rounds=values[1])
+    else:
+        runner = Runner()
+
     game_interface = GameOfLife(runner)
     game_interface.launch()
 
