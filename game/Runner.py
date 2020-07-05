@@ -48,12 +48,14 @@ class Runner:
         neigbhors = []
         top_y_index = cell.address['y'] - 1 if cell.address['y'] > 0 else self.size - 1
         bot_y_index = cell.address['y']+ 1 if cell.address['y'] < self.size - 1 else 0
+
         for y in [top_y_index, cell.address['y'], bot_y_index]:
             left_x_index = cell.address['x'] - 1 if cell.address['x'] > 0 else self.size - 1
             right_x_index = cell.address['x'] + 1 if cell.address['x'] < self.size - 1 else 0
             for x in [left_x_index, cell.address['x'], right_x_index]:
                 neigbhors.append(self.map[y][x])
-        return [n for n in neigbhors if n.status == 'alive']
+
+        return [n for n in neigbhors if n.status == 'alive' and n is not cell]
 
     def update(self):
         for cell in self.to_revive:
