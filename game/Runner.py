@@ -1,4 +1,4 @@
-from Cell import Cell
+from game.Cell import Cell
 
 
 class Runner:

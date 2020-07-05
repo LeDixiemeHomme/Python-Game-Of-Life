@@ -22,8 +22,8 @@ class IHM:
 
     def launch(self, root):
         title = Label(root, text='PARAMETERS :')
-        elements = [(Label(root, text='un élément'), Entry(root, textvariable=(StringVar(root)))),
-                    (Label(root, text='un autre élément'), Entry(root, textvariable=(StringVar(root))))]
+        elements = [(Label(root, text='Dimension'), Entry(root, textvariable=(StringVar(root)))),
+                    (Label(root, text='Round number'), Entry(root, textvariable=(StringVar(root))))]
         button = Button(root, text='clic', command=partial(self.data_treatment, elements, self.values, root))
 
         title.grid(column=0, row=0)
