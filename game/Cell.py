@@ -1,6 +1,6 @@
 class Cell:
 
-    def __init__(self, n, status='alive'):
+    def __init__(self, n, status='dead'):
         self.status = status
         self.n = n
         self.address = {'x': 'unset', 'y': 'unset'}
