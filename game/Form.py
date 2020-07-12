@@ -42,7 +42,7 @@ class Form(Enum):
     }
 
     @classmethod
-    def get_shape_form(shape):
+    def get_shape_form(cls, shape):
         return {
             'x': len(shape[0]),
             'y': len(shape)

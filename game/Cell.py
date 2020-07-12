@@ -6,7 +6,7 @@ class Cell:
         self.address = {'x': 'unset', 'y': 'unset'}
 
     def __str__(self):
-        return self.status + ' x : ' + str(self.address['x']) + ' y : ' + str(self.address['y']) + ' ' + str(self.n)
+        return 'X' if self.status == 'dead' else 'V'
 
     def revive(self):
         self.status = 'alive'
