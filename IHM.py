@@ -2,6 +2,8 @@ from tkinter import StringVar, Label, Entry, Button
 from functools import partial
 
 class IHM:
+    '''Class used to generate an Ihm
+    which give parameter to a runner instance through user inputs'''
 
     def __init__(self):
         self.values = list()

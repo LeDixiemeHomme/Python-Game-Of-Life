@@ -1,6 +1,9 @@
 from enum import Enum
 import random
+
 class Form(Enum):
+    '''Class containing every cells shape'''
+
     STABLE = {
         'BLOC': [
             ['a', 'a'],

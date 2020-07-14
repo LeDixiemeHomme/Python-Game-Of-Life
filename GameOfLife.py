@@ -1,6 +1,9 @@
 import pygame
 
 class GameOfLife:
+    '''Class used to setup a pygame window and
+    display all of the runner map states'''
+
     window_surface = None
 
     def __init__(self, runner):

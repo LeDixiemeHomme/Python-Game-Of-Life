@@ -4,6 +4,9 @@ import random
 
 
 class Runner:
+    '''Class wich provide a map of cells and
+     manage their behaviour through rules'''
+
     to_revive = []
     to_kill = []
     forms = Form
