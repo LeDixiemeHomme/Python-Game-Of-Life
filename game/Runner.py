@@ -8,7 +8,7 @@ class Runner:
     to_kill = []
     forms = Form
 
-    def __init__(self, forms_amount=4, density=100, size=5, initial_status="dead", rounds=10):
+    def __init__(self, forms_amount=300, density=100, size=50, initial_status="dead", rounds=10):
         self.density = density
         self.size = size
         self.map = self.generate_map(initial_status, size)
@@ -124,7 +124,14 @@ class Runner:
         return ('\ndensity = ' + str(self.density) + '\nsize = ' + str(self.size) + '\npopulation = \n' + self.stringify_map())
 
     def stringify_map(self):
-        str_to_modify = [str(cell) for cell in cell_array]
-        print(str_to_modify)
+        str_to_modify = str([[str(cell) for cell in cell_array] for cell_array in self.map])
+        final_str = ''
+        for i in range(len(str_to_modify)):
+            if(str_to_modify[i] is 'X' or str_to_modify[i] is 'V'):
+                print(str_to_modify[i])
+                final_str += str_to_modify[i]
+            else:
+                final_str += ''
+            
 
-        return str_to_modify
+        return final_str
