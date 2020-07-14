@@ -10,9 +10,9 @@ while input_interface.replay:
     input_interface.launch(Tk())
     values = input_interface.getValues()
     if values:
-        print([v for v in values])
         runner = Runner(size=values[0], rounds=values[1], forms_amount=values[2])
     else:
+        print('Running with default parameters ...')
         runner = Runner()
 
     game_interface = GameOfLife(runner)

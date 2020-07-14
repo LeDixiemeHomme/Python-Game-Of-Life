@@ -1,5 +1,5 @@
-from Cell import Cell
-from Form import Form
+from game.Cell import Cell
+from game.Form import Form
 import random
 
 
@@ -8,7 +8,7 @@ class Runner:
     to_kill = []
     forms = Form
 
-    def __init__(self, forms_amount=50, density=100, size=20, initial_status="dead", rounds=10):
+    def __init__(self, forms_amount=50, density=100, size=50, initial_status="dead", rounds=50):
         self.density = density
         self.size = size
         self.map = self.generate_map(initial_status, size)
@@ -38,7 +38,6 @@ class Runner:
             for y_index in range(Form.get_shape_form(shape)["y"]):
                 x = (origin['x'] + x_index) % self.size
                 y = (origin['y'] + y_index) % self.size
-                print(x, ' ', y)
                 if self.is_free(x, y) is not True:
                     return False
         return True
@@ -48,10 +47,7 @@ class Runner:
             for y_index in range(Form.get_shape_form(shape)["y"]):
                 x = (origin['x'] + x_index) % self.size
                 y = (origin['y'] + y_index) % self.size
-                print(self.map[y][x].status)
-                print('after')
                 self.map[y][x].status = 'alive' if shape[y_index][x_index] == 'a' else 'dead'
-                print(self.map[y][x].status)
 
         return
 
