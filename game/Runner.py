@@ -8,7 +8,7 @@ class Runner:
     to_kill = []
     forms = Form
 
-    def __init__(self, forms_amount=300, density=100, size=50, initial_status="dead", rounds=10):
+    def __init__(self, forms_amount=5, density=100, size=10, initial_status="dead", rounds=10):
         self.density = density
         self.size = size
         self.map = self.generate_map(initial_status, size)
@@ -22,14 +22,13 @@ class Runner:
     def generate_forms(self, amount):
         for _ in range(amount):
             tries = 10
-            shape = Form.get_shape(Form.OSCILLATOR)
+            shape = Form.get_shape(Form.STABLE)
             placable = False
             while placable is not True and tries > 0:
                 tries -= 1
                 random_point = self.get_random_point()
                 placable = self.check_place(random_point, shape)
                 if placable:
-                    print(placable)
                     self.place(random_point, shape)
 
         return
@@ -39,6 +38,7 @@ class Runner:
             for y_index in range(Form.get_shape_form(shape)["y"]):
                 x = (origin['x'] + x_index) % self.size
                 y = (origin['y'] + y_index) % self.size
+                print(x, ' ', y)
                 if self.is_free(x, y) is not True:
                     return False
         return True
@@ -48,7 +48,11 @@ class Runner:
             for y_index in range(Form.get_shape_form(shape)["y"]):
                 x = (origin['x'] + x_index) % self.size
                 y = (origin['y'] + y_index) % self.size
+                print(self.map[y][x].status)
+                print('after')
                 self.map[y][x].status = 'alive' if shape[y_index][x_index] == 'a' else 'dead'
+                print(self.map[y][x].status)
+
         return
 
     def is_free(self, x, y):
@@ -76,15 +80,14 @@ class Runner:
 
         for cell_line in self.map:
             for cell in cell_line:
-                self.try_kill(
-                    cell) if cell.status == 'alive' else self.try_revive(cell)
+                self.try_kill(cell) if cell.status == 'alive' else self.try_revive(cell)
         self.update()
         self.reset()
         self.rounds -= 1
 
     def try_kill(self, cell):
         neighbourhood = self.get_neighborhood(cell)
-        if len(neighbourhood) is not 2 or 3:
+        if len(neighbourhood) is not 2 and len(neighbourhood) is not 3:
             self.to_kill.append(cell)
 
     def try_revive(self, cell):
@@ -124,14 +127,9 @@ class Runner:
         return ('\ndensity = ' + str(self.density) + '\nsize = ' + str(self.size) + '\npopulation = \n' + self.stringify_map())
 
     def stringify_map(self):
-        str_to_modify = str([[str(cell) for cell in cell_array] for cell_array in self.map])
-        final_str = ''
-        for i in range(len(str_to_modify)):
-            if(str_to_modify[i] is 'X' or str_to_modify[i] is 'V'):
-                print(str_to_modify[i])
-                final_str += str_to_modify[i]
-            else:
-                final_str += ''
-            
+        full_cells = [[str(cell) for cell in cell_array]
+                      for cell_array in self.map]
+        for i in range(len(full_cells)):
+            print(full_cells[i])
 
-        return final_str
+        return str(full_cells)
