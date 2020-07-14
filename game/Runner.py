@@ -1,5 +1,6 @@
 from Cell import Cell
 from Form import Form
+import random
 
 
 class Runner:
@@ -7,7 +8,7 @@ class Runner:
     to_kill = []
     forms = Form
 
-    def __init__(self, forms_amount=3, density=100, size=10, initial_status="dead", rounds=10):
+    def __init__(self, forms_amount=4, density=100, size=5, initial_status="dead", rounds=10):
         self.density = density
         self.size = size
         self.map = self.generate_map(initial_status, size)
@@ -19,10 +20,47 @@ class Runner:
         return [[Cell((i + 1) * (_ + 1), initial_status) for i in range(size)] for _ in range(size)]
 
     def generate_forms(self, amount):
-        for _ in range(3):
-            shape = Form.get_shape()
-            print(shape)
+        for _ in range(amount):
+            tries = 10
+            shape = Form.get_shape(Form.OSCILLATOR)
+            placable = False
+            while placable is not True and tries > 0:
+                tries -= 1
+                random_point = self.get_random_point()
+                placable = self.check_place(random_point, shape)
+                if placable:
+                    print(placable)
+                    self.place(random_point, shape)
+
         return
+
+    def check_place(self, origin, shape):
+        for x_index in range(Form.get_shape_form(shape)["x"]):
+            for y_index in range(Form.get_shape_form(shape)["y"]):
+                x = (origin['x'] + x_index) % self.size
+                y = (origin['y'] + y_index) % self.size
+                if self.is_free(x, y) is not True:
+                    return False
+        return True
+
+    def place(self, origin, shape):
+        for x_index in range(Form.get_shape_form(shape)["x"]):
+            for y_index in range(Form.get_shape_form(shape)["y"]):
+                x = (origin['x'] + x_index) % self.size
+                y = (origin['y'] + y_index) % self.size
+                self.map[y][x].status = 'alive' if shape[y_index][x_index] == 'a' else 'dead'
+        return
+
+    def is_free(self, x, y):
+        x %= self.size
+        y %= self.size
+        return True if self.map[y][x].status == 'dead' else False
+
+    def get_random_point(self):
+        return {
+            'x': random.randint(0, self.size - 1),
+            'y': random.randint(0, self.size - 1)
+        }
 
     def set_addresses(self):
         for i in range(len(self.map)):
@@ -83,7 +121,10 @@ class Runner:
         self.to_revive = []
 
     def __str__(self):
-        return ('\ndensity = ' + str(self.density) + '\nsize = ' + str(self.size) + '\npopulation = ' + self.stringify_map())
+        return ('\ndensity = ' + str(self.density) + '\nsize = ' + str(self.size) + '\npopulation = \n' + self.stringify_map())
 
     def stringify_map(self):
-        return str([[str(cell) for cell in cell_array] for cell_array in self.map])
+        str_to_modify = [str(cell) for cell in cell_array]
+        print(str_to_modify)
+
+        return str_to_modify
