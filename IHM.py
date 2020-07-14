@@ -35,12 +35,13 @@ class IHM:
     def launch(self, root):
         title = Label(root, text='PARAMETERS :')
         elements = [(Label(root, text='Dimension'), Entry(root, textvariable=(StringVar(root)))),
-                    (Label(root, text='Round number'), Entry(root, textvariable=(StringVar(root))))]
+                    (Label(root, text='Round number'), Entry(root, textvariable=(StringVar(root)))),
+                    (Label(root, text='Form amount'), Entry(root, textvariable=(StringVar(root))))]
         button = Button(root, text='clic', command=partial(self.data_treatment, elements, self.values, root))
 
         title.grid(column=0, row=0)
-        [value[0].grid(column=0, row=i + 1) for i, value in enumerate(elements)]
-        [value[1].grid(column=1, row=i + 1) for i, value in enumerate(elements)]
+
+        [(value[1][0].grid(column=0, row=value[0]+1), value[1][1].grid(column=1, row=value[0]+1)) for value in [(i,tupl) for i,tupl in enumerate(elements)]]
 
         button.grid(column=1, row=5)
         root.mainloop()

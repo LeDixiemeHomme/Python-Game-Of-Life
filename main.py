@@ -11,7 +11,7 @@ while input_interface.replay:
     values = input_interface.getValues()
     if values:
         print([v for v in values])
-        runner = Runner(size=values[0], rounds=values[1])
+        runner = Runner(size=values[0], rounds=values[1], forms_amount=values[2])
     else:
         runner = Runner()
 
