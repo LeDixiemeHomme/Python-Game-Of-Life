@@ -8,7 +8,7 @@ class Runner:
     to_kill = []
     forms = Form
 
-    def __init__(self, forms_amount=5, density=100, size=10, initial_status="dead", rounds=10):
+    def __init__(self, forms_amount=50, density=100, size=20, initial_status="dead", rounds=10):
         self.density = density
         self.size = size
         self.map = self.generate_map(initial_status, size)
@@ -22,7 +22,7 @@ class Runner:
     def generate_forms(self, amount):
         for _ in range(amount):
             tries = 10
-            shape = Form.get_shape(Form.STABLE)
+            shape = Form.get_shape()
             placable = False
             while placable is not True and tries > 0:
                 tries -= 1
