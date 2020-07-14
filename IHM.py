@@ -6,20 +6,29 @@ class IHM:
     which give parameter to a runner instance through user inputs'''
 
     def __init__(self):
-        self.values = list()
-        self.replay = True
+        self._values = list()
+        self._replay = True
 
-    def getValues(self):
-        for c, v in enumerate(self.values):
+    def _get_values(self):
+        for c, v in enumerate(self._values):
             try:
-                self.values[c] = int(v)
+                self._values[c] = int(v)
             except ValueError:
                 print('No letter allowed', v)
                 return False
             except TypeError:
                 print('No letter allowed', v)
                 return False
-        return self.values
+        return self._values
+
+    def _get_replay(self):
+        return self._replay
+
+    def _set_replay(self, bool):
+        self._replay = bool
+
+    values = property(_get_values)
+    replay = property(_get_replay, _set_replay)
 
     def data_treatment(self, elements, values, root):
         values.clear()
@@ -28,7 +37,7 @@ class IHM:
         root.destroy()
 
     def close(self, root):
-        self.replay = False
+        self._set_replay(False)
         root.destroy()
 
     def retry(self, root):
@@ -39,7 +48,7 @@ class IHM:
         elements = [(Label(root, text='Dimension'), Entry(root, textvariable=(StringVar(root)))),
                     (Label(root, text='Round number'), Entry(root, textvariable=(StringVar(root)))),
                     (Label(root, text='Form amount'), Entry(root, textvariable=(StringVar(root))))]
-        button = Button(root, text='clic', command=partial(self.data_treatment, elements, self.values, root))
+        button = Button(root, text='clic', command=partial(self.data_treatment, elements, self._values, root))
 
         title.grid(column=0, row=0)
 

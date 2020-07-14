@@ -8,14 +8,14 @@ class GameOfLife:
 
     def __init__(self, runner):
         pygame.init()
-        self.runner = runner
-        self.death_color = (0, 0, 0)
-        self.alive_color = (255, 0, 0)
-        self.scale = 8
+        self._runner = runner
+        self._death_color = (0, 0, 0)
+        self._alive_color = (255, 0, 0)
+        self._scale = 8
 
     def launch(self):
-        self.window_surface = pygame.display.set_mode((self.runner.size*self.scale,self.runner.size*self.scale))
-        self.treatment(self.runner)
+        self.window_surface = pygame.display.set_mode((self._runner.size*self._scale,self._runner.size*self._scale))
+        self.treatment(self._runner)
 
         launched = True
         while launched:
@@ -27,8 +27,8 @@ class GameOfLife:
         while runner.rounds >= 0:
             for elements in runner.map:
                 for element in elements:
-                    color = self.alive_color if element.status == 'alive' else self.death_color
-                    cell = pygame.Rect(element.address['x'] * self.scale, element.address['y'] * self.scale, self.scale, self.scale)
+                    color = self._alive_color if element.status == 'alive' else self._death_color
+                    cell = pygame.Rect(element.address['x'] * self._scale, element.address['y'] * self._scale, self._scale, self._scale)
                     pygame.draw.rect(self.window_surface, color, cell)
 
                 pygame.display.flip()
