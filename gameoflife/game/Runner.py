@@ -86,12 +86,12 @@ class Runner:
 
     def try_kill(self, cell):
         neighbourhood = self.get_neighborhood(cell)
-        if len(neighbourhood) is not 2 and len(neighbourhood) is not 3:
+        if len(neighbourhood) != 2 and len(neighbourhood) != 3:
             self.to_kill.append(cell)
 
     def try_revive(self, cell):
         neighbourhood = self.get_neighborhood(cell)
-        if len(neighbourhood) is 3:
+        if len(neighbourhood) == 3:
             self.to_revive.append(cell)
 
     def get_neighborhood(self, cell):
