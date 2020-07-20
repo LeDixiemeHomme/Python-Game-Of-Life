@@ -44,11 +44,13 @@ class IHM:
         root.destroy()
 
     def launch(self, root):
+        root.title("Paramètres GOL")
+        root.geometry("300x150")
         title = Label(root, text='PARAMETERS :')
         elements = [(Label(root, text='Dimension'), Entry(root, textvariable=(StringVar(root)))),
                     (Label(root, text='Round number'), Entry(root, textvariable=(StringVar(root)))),
                     (Label(root, text='Form amount'), Entry(root, textvariable=(StringVar(root))))]
-        button = Button(root, text='submit', command=partial(self.data_treatment, elements, self._values, root))
+        button = Button(root, text='lancer', command=partial(self.data_treatment, elements, self._values, root))
 
         title.grid(column=0, row=0)
 
@@ -58,6 +60,8 @@ class IHM:
         root.mainloop()
 
     def pop_up(self, root):
+        root.title("Rejouer au GOL")
+        root.geometry("250x100")
         title_retry = Label(root, text='Would you like to retry ?')
         buttonYes = Button(root, text='Yes', command=partial(self.retry, root))
         buttonNo = Button(root, text='No', command=partial(self.close, root))

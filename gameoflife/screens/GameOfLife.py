@@ -24,7 +24,6 @@ class GameOfLife:
                     launched = False
 
     def treatment(self, runner):
-        # while runner.rounds >= 0:
         for elements in runner.map:
             for element in elements:
                 color = self._alive_color if element.status == 'alive' else self._death_color
@@ -32,5 +31,4 @@ class GameOfLife:
                 pygame.draw.rect(self.window_surface, color, cell)
 
             pygame.display.flip()
-            # pygame.time.delay(1)
         runner.run()

@@ -4,7 +4,6 @@ from gameoflife.screens.GameOfLife import GameOfLife
 from gameoflife.screens.Ihm import IHM
 
 input_interface = IHM()
-print("run with the main.py file")
 
 while input_interface.replay:
 
