@@ -1,7 +1,7 @@
 from tkinter import Tk
-from gameoflife.game.Runner import Runner
-from gameoflife.screens.GameOfLife import GameOfLife
-from gameoflife.screens.Ihm import IHM
+from Vallegameoflife.game.Runner import Runner
+from Vallegameoflife.screens.GameOfLife import GameOfLife
+from Vallegameoflife.screens.Ihm import IHM
 
 input_interface = IHM()
 

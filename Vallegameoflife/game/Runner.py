@@ -1,5 +1,5 @@
-from gameoflife.game.Cell import Cell
-from gameoflife.game.Form import Form
+from Vallegameoflife.game.Cell import Cell
+from Vallegameoflife.game.Form import Form
 import random
 
 
@@ -11,7 +11,7 @@ class Runner:
     to_kill = []
     forms = Form
 
-    def __init__(self, forms_amount=50, density=100, size=50, initial_status="dead", rounds=50):
+    def __init__(self, forms_amount=50, density=100, size=50, initial_status="dead", rounds=50000):
         self.density = density
         self.size = size
         self.map = self.generate_map(initial_status, size)

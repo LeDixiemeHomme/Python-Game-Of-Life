@@ -2,6 +2,10 @@
 
 ## Documentation ##
 
+### Repository ###
+
+Cloner le projet : https://github.com/LeDixiemeHomme/Python-Game-Of-Life
+
 ### Source ###
 
 Gestion des événements pygame : 
@@ -33,5 +37,39 @@ On pousse dans une list les cellules à update, pour le faire seulement à la fi
 
 Ensuite, on passe au tour suivant, et ce jusqu'à la fin des rounds.
 
+
 ### Affichage ###
 
+L'affichage est géré par pygame et tkinter, une fenetre s'ouvre au lancement pour recolter des paramtres grace a tkinter puis le jeu se lance avec pygame.
+
+Les données du tableau sont affichés a l'aide de rafraichissement de la page.
+
+Puis a la fin on peut fermer la page du jeu et rejouer si on le désire.
+
+Les paramètres sont testés et si une valeur est inappropriée on lance le jeu avec des paramètres par defaut.
+ 
+ 
+### Répartition du travail par les contributors ###
+
+Benoît Valle (LeDixiemeHomme) s'est chargé de mettre en place toutes les fenetre d'affichage, ainsi que de rendre le projet executable et disponible via PyPI.
+ 
+Simon Halimi (Simonpo95) s'est chargé de mettre en place tous le fonctionnement back end de l'application, de la mise en place des éléments dans le tableau à leur comportement tout au long du jeu.
+ 
+### Installation ###
+
+Deux méthodes :
+    
+    I Passer par pypi : 
+    
+    pip install Vallegameoflife==1.0.9
+    
+    Puis lancer avec la commande "Vallegameoflife"
+ 
+
+    II Cloner le repository :
+    
+    git clone https://github.com/LeDixiemeHomme/Python-Game-Of-Life
+    
+    Se mettre à la racine, executer la commande "python setup.py develop" pour installer la projet.
+    
+    Ensuite on peut lancer le projet grâce a la commande " Vallegameoflife ".

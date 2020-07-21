@@ -1,2 +1,2 @@
 @REM Windows batch script to run the python script
-@python %~dp0\gameoflife %*
+@python %~dp0\Vallegameoflife %*
